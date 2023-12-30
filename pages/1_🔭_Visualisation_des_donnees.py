@@ -3,8 +3,8 @@ import streamlit as st
 import pandas as pd 
 import matplotlib.pyplot as plt
 
-st.markdown("# Exploration des données")
-st.sidebar.header("Exploration des données")
+st.markdown("# Visualisation des données")
+st.sidebar.header("Visualisation des données")
 
 
 pages = ["Évolution des températures par continent", "Évolution des températures par hémisphère", "Évolution des anomalies", "Évolution des températures avec incertiture"]
