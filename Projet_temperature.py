@@ -8,24 +8,26 @@ Created on Tue Jul 18 14:57:06 2023
 import streamlit as st
 
 st.set_page_config(
-    page_title="Projet température",
+    page_title="# Projet Température",
     page_icon="👋",
+    layout="wide"
 )
 
 st.write("# Bienvenue au Projet Temperature MAI23 ! 👋")
 
 st.sidebar.success("Choisissez un menu")
 
-st.write("### Le Projet")
+st.write("## Le Projet")
     
 st.write("Ce projet est centré sur une étude de l'évolution des températures terrestres dans le passé afin de pouvoir prédire une éventuelle évolution future, à l'horizon 2050.")
 
-st.write("Nous aurons à notre disposition une série de fichiers au format *.csv qui nous permettront d'obtenir in fine un dataset nommé CO2.csv sur lequel nous baserons l'étude.")
+st.write("Nous aurons à notre disposition une série de fichiers au format *.csv qui nous permettront de mettre en place plusieurs datasets sur lesquels nous baserons l'étude.")
 
-st.write("En premier lieu, nous explorerons ce dataset. Puis, grâce à la Data Visualisation, nous extrairons des informations pertinentes. Et nous terminerons par l'implémentations de modèles de Machine Learning pour prédire l'évolution des températures.")
+st.write("Nous procéderons selon le cheminement suivant : Exploration, Visualisation, Analyse et Modélisation.")
 
 
 st.image ("images/earth.jpg")
+
 
 st.write("""
          ````python
@@ -44,3 +46,4 @@ st.write("""
          from sklearn.metrics import r2_score
          ````
          """)
+         

@@ -29,7 +29,6 @@ st.write("""
          - La somme des anomalies de l'année
          - L'incertitude dû à la qualité des mesures
          """)
-st.write("En 1950 les climatologues se sont accordés pour définir qu'une anomalie était une température d'un écart de 14.185 °C par rapport à une normale de saison. ")
 
 st.write("## Anomalies moyenne Global")
 st.dataframe(df_anoMoyGlobal.head())
