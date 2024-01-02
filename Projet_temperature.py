@@ -44,7 +44,7 @@ st.write("Toutefois avant de commencer, écoutons l'article 1er de la Déclarati
 
 st.write("Nous verrons plus tard l'impact de la météorologie au cours de l'Histoire de l'Humanité. Plus précisément avec les Normands, les Vikings et l'Angleterre en 1066")
 
-st.image ("images/Omniglot.jpg")
+st.image ("images/omniglot.jpg")
 
 # Charger le fichier audio
 audio_file = open("oldenglish.mp3", "rb").read()
