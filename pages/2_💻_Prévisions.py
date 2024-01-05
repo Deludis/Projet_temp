@@ -1,9 +1,6 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression, Ridge, Lasso
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import RandomForestRegressor
-from xgboost import XGBRegressor
+from sklearn.linear_model import LinearRegression
 import streamlit as st 
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
