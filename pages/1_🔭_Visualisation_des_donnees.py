@@ -1,9 +1,14 @@
-
 import streamlit as st 
 import pandas as pd 
 import matplotlib.pyplot as plt
 import seaborn as sns 
 import plotly.express as px
+
+st.set_page_config(
+    page_title="Projet Température",
+    page_icon="👋",
+    layout="wide",
+)
 
 st.markdown("# Visualisation des données")
 st.sidebar.header("Visualisation des données")
@@ -18,7 +23,7 @@ if page == pages[0]:
 
     st.write("### Évolution des températures par continent")
     
-       # Liste des continents
+    # Liste des continents
     regions_of_interest = ['Africa', 'Asia', 'Europe', 'North America', 'South America', 'Oceania']
 
     # Sélection des continents à afficher
@@ -40,10 +45,10 @@ if page == pages[0]:
         df_plot = df_selected_regions[df_selected_regions['country'] == region]
         ax.plot(df_plot['year'], df_plot['total_temperature_change'], label=region)
 
-    ax.set_title('Évolution du changement de température pour différents continents (1850-2021)', fontsize=40)  # Ajuster la taille de la police
-    ax.set_xlabel('Année', fontsize=32)  # Ajuster la taille de la police
-    ax.set_ylabel('Changement de température total', fontsize=32)  # Ajuster la taille de la police
-    ax.legend(fontsize=28)  # Ajuster la taille de la police
+    ax.set_title('Évolution du changement de température pour différents continents (1850-2021)', fontsize=30)  # Ajuster la taille de la police
+    ax.set_xlabel('Année', fontsize=30)  # Ajuster la taille de la police
+    ax.set_ylabel('Changement de température total', fontsize=30)  # Ajuster la taille de la police
+    ax.legend(fontsize=20)  # Ajuster la taille de la police
     ax.grid(True)
     
     
@@ -58,10 +63,11 @@ if page == pages[0]:
     st.write("Pour l'Amérique du nord le réel décollage a lieu après la Guerre de Sécession en 1865, décrite comme étant la première guerre industrielle. L'industrialisation des anciens états sudistes essentiellement agricoles sera un ajout conséquent à la puissance indutrielle des USA. ")
     st.write("Pour l'Asie, le Japon comprend rapidement les avantages de l'industrialisation avec les Meijis en 1868, toutefois au niveau du continent la mise en place d'une politique de réindustralisatoin de la Chine avec Mao Zedong est nettement visible en 1950.")
     st.write("Pour les continents Sud-américain et Africain l'émergence en tant que puissances industrielles est beaucoup plus tardive. Toutefois elle a bien démarré au passage du XXIéme siècle.")
-    st.write("L'Australasie est un cas intéressant car ce continent est industrialisé et même avancé dans le cas de l'Australie et de la Nouvelle-Zélande mais son sa marque au niveau des températures reste quasiment anécdotique par rapport au reste du monde. La faiblesse de sa population en est peut-être la cause? ")
+    st.write("L'Australasie est un cas intéressant car ce continent est industrialisé et même avancé dans le cas de l'Australie et de la Nouvelle-Zélande et malgré cela sa contribution à l'volution des températures reste minime.")    
+    st.write("\n")
+    st.write("\n")
     
-    
-    tabHemi, tabHemiMoyMob= st.tabs(["Evolutions des températures dans hémisphère nord et sud", "Evolutions des températures dans hémisphère nord et sud avec moyenne mobile à 5 ans"])
+    tabHemi, tabHemiMoyMob= st.tabs(["## Evolutions des températures dans hémisphère nord et sud", "## Evolutions des températures dans hémisphère nord et sud avec moyenne mobile à 5 ans"])
     
     df_zone = pd.read_csv('data/Temperature Moyenne Index Global 100.csv', sep=',')
     # Filtrer les données pour obtenir seulement celles de 1880 à 2022
@@ -73,31 +79,47 @@ if page == pages[0]:
 
     with tabHemi: 
         # Tracer les courbes
-        fig = plt.figure(figsize=(20, 10))
+        fig = plt.figure(figsize=(25, 12))
         plt.plot(df_zone_filtered['Year'], df_zone_filtered['NHem'], label='NHem')
         plt.plot(df_zone_filtered['Year'], df_zone_filtered['SHem'], label='SHem')
-        plt.title('Évolution des températures dans l\'hémisphère nord et sud (1880-2022)')
+        plt.title('Évolution des températures dans l\'hémisphère nord et sud (1880-2022)', fontsize=30)
         plt.axhline(y=14.185, color='red', linestyle='--', linewidth=1)
-        plt.xlabel('Année')
-        plt.ylabel('Anomalie de température')
-        plt.legend()
+        plt.xlabel('Année', fontsize=30)
+        plt.ylabel('Anomalie de température', fontsize=30)
+        plt.legend(fontsize=20)
         plt.grid(True)
         st.pyplot(fig)
     with tabHemiMoyMob: 
         # Tracer les courbes
-        fig = plt.figure(figsize=(20, 10))
+        fig = plt.figure(figsize=(25, 12))
         # Ajoutez une colonne pour la moyenne mobile sur 5 ans
         df_zone_filtered['NHem_moyenne_mobile_5ans'] = df_zone_filtered['NHem'].rolling(window=5).mean()
         df_zone_filtered['SHem_moyenne_mobile_5ans'] = df_zone_filtered['SHem'].rolling(window=5).mean()
         plt.plot(df_zone_filtered['Year'], df_zone_filtered['NHem_moyenne_mobile_5ans'], label='NHem - Moyenne mobile 5 ans')
         plt.plot(df_zone_filtered['Year'], df_zone_filtered['SHem_moyenne_mobile_5ans'], label='SHem - Moyenne mobile 5 ans')
-        plt.title('Évolution des températures avec moyennes mobiles à 5 ans (1880-2022)')
+        plt.title('Évolution des températures avec moyennes mobiles à 5 ans (1880-2022)', fontsize=30)
         plt.axhline(y=14.185, color='red', linestyle='--', linewidth=1)
-        plt.xlabel('Année')
-        plt.ylabel('Anomalie de température')
-        plt.legend()
+        plt.xlabel('Année', fontsize=30)
+        plt.ylabel('Anomalie de température', fontsize=30)
+        plt.legend(fontsize=20)
         plt.grid(True)
         st.pyplot(fig)
+        
+    st.image("images/carte-du-monde-continents.jpg")  
+    st.write("carte-du-monde.net")
+    st.write("## L'hémisphère Nord :")
+    st.write("Environ 100 millions de kilomètres carrés de terres émergées sont situés dans cet hémisphère, soit les deux tiers du total mondial.")
+    st.write("Comme l'hémisphère nord a une surface de 255 millions de kilomètres carrés, il est couvert de terres émergées à hauteur de 40 %.")
+    st.write("Il est à remarquer que la plus grande partie de l'humanité (près de 90 % de la population totale) vit dans cet hémisphère,")
+    st.write("ce qui n'est guère surprenant étant donné que l'Asie, qui compte à elle seule environ 60 % de la population mondiale, est presque entièrement située dans l'hémisphère nord. ")
+    
+    st.write("## L'hémisphère Sud :")
+    st.write("L'hémisphère sud terrestre est essentiellement marin. Les terres émergées (50 millions de kilomètres carrés) ne représentent que 20 % de sa surface et le tiers des terres émergées terrestres.")
+    st.write("Entre 50 et 65 degrés de latitude sud, il n'y a quasiment pas de terre émergée, ce qui n'est pas le cas de l'hémisphère nord.")
+    st.write("L'Antarctique est le seul continent sans population indigène. ")
+    
+    st.write("### La population est peut-être aussi un facteur contribuant à l'évolution des températures ?")
+
 elif page == pages[1]:
     st.write("### Évolution de la population mondiale")
     df_co2 = pd.read_csv('data/CO2 Donnees.csv', sep = ',')
@@ -120,10 +142,10 @@ elif page == pages[1]:
         # Groupby par année et sum pour obtenir la somme du PIB (gdp) pour chaque année
         df_sum_gdp = df_filtered.groupby('year')['gdp'].sum().reset_index()
 
-        ax2.plot(df_sum_gdp['year'], df_sum_gdp['gdp'], label='Somme du PIB mondial', color='violet')
-        ax2.set_title('Évolution Population Mondiale (1850-2021)', fontsize=40)  # Ajuster la taille de la police
-        ax2.set_ylabel('Somme du PIB mondial', color='violet', fontsize=32)
-        ax2.tick_params(axis='y', labelcolor='violet')
+        ax2.plot(df_sum_gdp['year'], df_sum_gdp['gdp'], label='Somme du PIB mondial', color='black')
+        ax2.set_title('Évolution Population Mondiale (1850-2021)', fontsize=30)  # Ajuster la taille de la police
+        ax2.set_ylabel('Somme du PIB mondial', color='black', fontsize=30)
+        ax2.tick_params(axis='y', labelcolor='black')
     elif selected_graphic == "Température":
         df_anoIncTemp = pd.read_csv('data/Anomalies Incertitude Temperature.csv', sep=';')
         # Ajoutez la constante de 14.185 à la colonne "anomalie"
@@ -131,7 +153,7 @@ elif page == pages[1]:
 
         ax2.plot(df_anoIncTemp['year'], df_anoIncTemp['anomalie'], label='Évolution des températures', color='red')
         ax2.set_title('Évolution de la population mondiale et des températures (1850-2021)', fontsize=40)  # Ajuster la taille de la police
-        ax2.set_ylabel('Anomalie de température', color='red', fontsize=32)
+        ax2.set_ylabel('Anomalie de température', color='red', fontsize=30)
         ax2.tick_params(axis='y', labelcolor='red')
     elif selected_graphic == "Température avec moyenne mobile à 5 ans":
         df_anoIncTemp = pd.read_csv('data/Anomalies Incertitude Temperature.csv', sep=';')
@@ -139,8 +161,8 @@ elif page == pages[1]:
         df_anoIncTemp['anomalie'] = df_anoIncTemp['anomalie'] + 14.185
         
         ax2.plot(df_anoIncTemp['year'], df_anoIncTemp['anomalie'].rolling(window=5).mean(), label='Moyenne mobile (5 ans)', color='green')
-        ax2.set_title('Évolution de la population mondiale et des températures (1850-2021)\n avec moyenne mobile (5 ans)', fontsize=40)  # Ajuster la taille de la police
-        ax2.set_ylabel("Anomalie de température", color="green" , fontsize=32)
+        ax2.set_title('Évolution de la population mondiale et des températures (1850-2021)\n avec moyenne mobile (5 ans)', fontsize=30)  # Ajuster la taille de la police
+        ax2.set_ylabel("Anomalie de température", color="green" , fontsize=30)
         ax2.tick_params(axis='y', labelcolor='green')
     elif selected_graphic == "Somme du CO2":
         # Filtrer les données pour obtenir seulement celles où la colonne "iso_code" est renseignée et la période est de 1850 à 2018
@@ -219,10 +241,80 @@ elif page == pages[2]:
         st.pyplot(fig)
 
 else:
-    st.write("### Évolution des températures avec incertitude")
+    st.write("### Données sur les 10 pays les plus émetteurs")
+    tabTemp, tabGreenhouseGas= st.tabs(["Évolution de la température", "Évolution des gaz à effets de serre"])
+    df_co2 = pd.read_csv('data/CO2 Donnees.csv', sep=',')
     
-    
-    
-    
+    with tabGreenhouseGas: 
 
+        # Filtrer les données pour exclure les lignes où la colonne "iso_code" est vide
+        df_filtered = df_co2[df_co2['iso_code'].notnull()]
 
+        # Sélectionner les 10 pays ayant le plus grand total dans les colonnes spécifiées
+        top_10_countries = df_filtered.groupby('country').sum()[['co2_including_luc', 'methane', 'nitrous_oxide', 'total_ghg']].sum(axis=1).nlargest(10).index
+
+        # Créer un dataframe combiné avec les données de chaque pays
+        df_combined = pd.DataFrame()
+
+        for country in top_10_countries:
+            df_country = df_filtered[df_filtered['country'] == country].copy()
+            
+            # Supprimer les lignes contenant des valeurs NaN dans les colonnes spécifiées
+            columns_to_clean = ['co2_including_luc', 'methane', 'nitrous_oxide', 'total_ghg']
+            df_country = df_country.dropna(subset=columns_to_clean)
+            
+            # Ajouter une colonne pour le pays
+            df_country['country'] = country
+            
+            # Concaténer avec le dataframe combiné
+            df_combined = pd.concat([df_combined, df_country])
+
+        # Tracer le graphique
+        fig = plt.figure(figsize=(20, 10))
+        for country in top_10_countries:
+            df_plot = df_combined[df_combined['country'] == country]
+            plt.plot(df_plot['year'], df_plot['co2_including_luc'] + df_plot['methane'] + df_plot['nitrous_oxide'] + df_plot['total_ghg'], label=country)
+
+        plt.title('Évolution du total des émissions pour les 10 pays les plus émetteurs')
+        plt.xlabel('Année')
+        plt.ylabel('Total des émissions')
+        plt.legend()
+        plt.grid(True)
+        st.pyplot(fig)
+
+    with tabTemp:
+        # Filtrer les données pour exclure les lignes où la colonne "iso_code" est vide
+        df_filtered = df_co2[df_co2['iso_code'].notnull()]
+
+        # Sélectionner les 10 pays ayant le plus grand total dans les colonnes spécifiées
+        top_10_countries = df_filtered.groupby('country').sum()[['co2_including_luc', 'methane', 'nitrous_oxide', 'total_ghg']].sum(axis=1).nlargest(10).index
+
+        # Créer un dataframe combiné avec les données de chaque pays
+        df_combined = pd.DataFrame()
+
+        for country in top_10_countries:
+            df_country = df_filtered[df_filtered['country'] == country].copy()
+            
+            # Supprimer les lignes contenant des valeurs NaN dans les colonnes spécifiées
+            columns_to_clean = ['temperature_change_from_ch4', 'temperature_change_from_co2', 'temperature_change_from_ghg', 'temperature_change_from_n2o']
+            df_country = df_country.dropna(subset=columns_to_clean)
+            
+            # Ajouter une colonne pour le pays
+            df_country['country'] = country
+            
+            # Concaténer avec le dataframe combiné
+            df_combined = pd.concat([df_combined, df_country])
+
+        # Tracer le graphique
+        fig = plt.figure(figsize=(20, 10))
+        for country in top_10_countries:
+            df_plot = df_combined[df_combined['country'] == country]
+            total_temperature_change = df_plot[columns_to_clean].sum(axis=1)
+            plt.plot(df_plot['year'], total_temperature_change, label=country)
+
+        plt.title('Évolution du changement de température pour les 10 pays les plus émetteurs')
+        plt.xlabel('Année')
+        plt.ylabel('Changement de température total')
+        plt.legend()
+        plt.grid(True)
+        st.pyplot(fig)
