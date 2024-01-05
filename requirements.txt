@@ -2,3 +2,4 @@ seaborn
 plotly
 joblib
 scikit-learn
+xgboost

@@ -4,16 +4,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st 
 
-from fbprophet import Prophet
-
-#https://facebook.github.io/prophet/docs/quick_start.html#python-api
-df = pd.read_csv('https://raw.githubusercontent.com/facebook/prophet/main/examples/example_wp_log_peyton_manning.csv')
-m = Prophet()
-m.fit(df)  # df is a pandas.DataFrame with 'y' and 'ds' columns
-future = m.make_future_dataframe(periods=365)
-test = m.predict(future)
-test
-st.dataframe(future)
 """
 st.set_page_config(
     page_title="Projet Température",
