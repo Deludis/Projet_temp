@@ -60,10 +60,10 @@ st.dataframe(df_geo.head())
 st.write("Dimensions du dataframe :")
 st.write(df_geo.shape)
 if st.checkbox("Afficher les valeurs manquantes", key="geoValeursManquantes") : 
-    st.dataframe(df_co2.isna().sum())
+    st.dataframe(df_geo.isna().sum())
         
     if st.checkbox("Afficher les doublons", key="geoDoublons"): 
-        st.write(df_co2.duplicated().sum())
+        st.write(df_geo.duplicated().sum())
 
 st.write("## Temperature Index Global 100")
 st.write("### Ce dataframe ainsi que les deux suivants contiennent des valeurs mensuelles et annuelles de 1880 à 2021 concernant les fluctuations de température pour la planète, l'hémisphère Nord et Sud respectivement.")
@@ -71,40 +71,40 @@ st.dataframe(df_global.head())
 st.write("Dimensions du dataframe :")
 st.write(df_global.shape)
 if st.checkbox("Afficher les valeurs manquantes", key="globalValeursManquantes") : 
-    st.dataframe(df_co2.isna().sum())
+    st.dataframe(df_global.isna().sum())
         
     if st.checkbox("Afficher les doublons", key="globalDoublons"): 
-        st.write(df_co2.duplicated().sum())
+        st.write(df_global.duplicated().sum())
 
 st.write("## Temperature Index Nord 100")
 st.dataframe(df_north.head())
 st.write("Dimensions du dataframe :")
 st.write(df_north.shape)
 if st.checkbox("Afficher les valeurs manquantes", key="northValeursManquantes") : 
-    st.dataframe(df_co2.isna().sum())
+    st.dataframe(df_north.isna().sum())
         
     if st.checkbox("Afficher les doublons", key="northDoublons"): 
-        st.write(df_co2.duplicated().sum())
+        st.write(df_north.duplicated().sum())
 
 st.write("## Temperature Index Sud 100")
 st.dataframe(df_south.head())
 st.write("Dimensions du dataframe :")
 st.write(df_south.shape)
 if st.checkbox("Afficher les valeurs manquantes", key="southValeursManquantes") : 
-    st.dataframe(df_co2.isna().sum())
+    st.dataframe(df_south.isna().sum())
         
     if st.checkbox("Afficher les doublons", key="southDoublons"): 
-        st.write(df_co2.duplicated().sum())
+        st.write(df_south.duplicated().sum())
 
 st.write("## Temperature Moyenne Index Global 100")
 st.dataframe(df_zone.head())
 st.write("Dimensions du dataframe :")
 st.write(df_zone.shape)
 if st.checkbox("Afficher les valeurs manquantes", key="zoneValeursManquantes") : 
-    st.dataframe(df_co2.isna().sum())
+    st.dataframe(df_zone.isna().sum())
         
     if st.checkbox("Afficher les doublons", key="zoneDoublons"): 
-        st.write(df_co2.duplicated().sum())
+        st.write(df_zone.duplicated().sum())
        
 
 st.write("## Temperature Mensuelle Absolue de 1951 à 1980 en degré Celsius")
@@ -115,9 +115,9 @@ st.dataframe(df_tempAbs.head())
 st.write("Dimensions du dataframe :")
 st.write(df_tempAbs.shape)
 if st.checkbox("Afficher les valeurs manquantes", key="tempsAbsValeursManquantes") : 
-    st.dataframe(df_co2.isna().sum())
+    st.dataframe(df_tempAbs.isna().sum())
         
     if st.checkbox("Afficher les doublons", key="tempsAbsDoublons"): 
-        st.write(df_co2.duplicated().sum())
+        st.write(df_tempAbs.duplicated().sum())
 
 st.write("#### Les fichiers .csv et .txt utilisés pour cette étude proviennent de https://data.giss.nasa.gov/gistemp/ et de https://github.com/owid/co2-data. Dans les autres cas leur provenannce est spécifiée dans la description des dataframes concernés.")

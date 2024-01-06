@@ -58,7 +58,7 @@ st.write("### Ce projet est centré sur une étude de l'évolution des températ
 st.write("### Nous avons à notre disposition un Dataset créé à partir de fichiers provenant de différentes sources, qui nous permettra d'avancer dans notre recherche.")
 st.write("### Nous procéderons selon le cheminement suivant : Introduction (vous y êtes), Origines et explorations des données, Visualisation, Prévisions et conclusions/perspectives.")
 st.write("### Toutefois avant de commencer, écoutons l'article 1er de la Déclaration Universelle des Droits de l'Homme (Article 1 of the Universal Declaration of Human Rights). La langue ne vous dit probablement rien et pourtant.")
-st.write("### Nous verrons plus tard l'impact du climat sur le cours de l'Histoire de l'Humanité. Plus précisément avec les Normands, les Vikings et l'Angleterre en 1066. Sans oublier la Révolution Française.")
+st.write("### Nous verrons plus tard l'impact du climat sur le cours de l'Histoire de l'Humanité. Plus précisément avec les Normands, les Vikings et l'Angleterre en 1066. Sans oublier la Révolution Française, la naissance de l'élevage, de l'agriculture et de l'écriture.")
 st.write("<br>", unsafe_allow_html=True)
 
 st.image ("images/omniglot.jpg")
@@ -90,7 +90,7 @@ st.markdown("""
 st.image ("images/hemisphère-nord-temperature-2000-ans.jpg")
 
 st.write("### Mission EPICA, ayant foré et analysé d’immenses carottes de glace en Antarctique. (3600m pour 800 000 ans)")
-st.write("### Deux événements sortent du lot; le réchauffement médiéval et le petit âge glaciaire.")
+st.write("### Deux événements sortent du lot; le réchauffement médiéval et le petit âge glaciaire. Il y a eu, bien entendu, d'autres événements remarquables avant l'avènement du calendrier Julien modifié en calendrier Grégorien.")
 st.write("<br>", unsafe_allow_html=True)
 
 st.write("### Et maintenant, en avant vers les trucs sérieux!")
