@@ -44,7 +44,7 @@ text-align: center;
 """
 st.markdown(footer,unsafe_allow_html=True)
 
-pages = ["Entrainement", "Corrélation", "Prédiction"]
+pages = ["Entrainements", "Corrélations", "Prédictions"]
 page = st.sidebar.radio("Aller vers la page :", pages)
 
 df_anoIncTemp = pd.read_csv('data/Anomalies Incertitude Temperature.csv', sep = ';')
@@ -136,12 +136,12 @@ if page == pages[0]:
             erreurs_quadratiques["Lasso :"] = lasso_mse
 
         ax.plot(test_data['year'], predictions, label=label)
-        plt.title('Prédictions pour les anomalies de température')
+        plt.title('Prédictions pour les anomalies de température', fontsize=30)
 
     with col1:
-        ax.set_xlabel('Année')
-        ax.set_ylabel('Anomalie de température')
-        ax.legend()
+        ax.set_xlabel('Année', fontsize=30)
+        ax.set_ylabel('Anomalie de température', fontsize=30)
+        ax.legend(fontsize=20)
         ax.grid(True)
         st.pyplot(fig)
 
@@ -155,15 +155,15 @@ if page == pages[0]:
                 st.write(erreurs_quadratiques[erreurs_quadratique])
                 
     st.write("### Nous allons entrainer 6 différents modèles avec deux années de départ : 1950 - 1980.")  
-    st.write("### Les durées de tests iront, respectivement, de 1950 à 2010 et de 1980 à 2010 et les trains de 2011 à 2021 dans le2 2 cas.")
+    st.write("### Les durées de tests iront, respectivement, de 1950 à 2010 et de 1980 à 2010 et les trains de 2011 à 2021 dans les 2 cas.")
     st.write("### Ceci nous permettra de voir si une période de test plus longue deviendrait plus pertinente.") 
     st.write("")
     st.write("### Les meilleurs résultats sont obtenus avec la Linear Regression avec un départ en 1980")
-    st.write("Il est important de noter que le MSE est sensible aux valeurs aberrantes (outliers), car les carrés accentuent davantage les erreurs importantes.")
-    st.write("Nous avons donc pris le parti de tenir compte des valeurs aberrantes, compte tenu de l'objet de l'étude. Nous vivons tous actuellement, avec plus ou moins de force avec ces valeurs.")            
+    st.write("#### Il est important de noter que le MSE est sensible aux valeurs aberrantes (outliers), car les carrés accentuent davantage les erreurs importantes.")
+    st.write("#### Nous avons donc pris le parti de tenir compte des valeurs aberrantes, compte tenu de l'objet de l'étude. Nous vivons tous actuellement, avec plus ou moins de force avec ces valeurs.")            
 
 elif page == pages[1]:
-    st.write("### Spearman, Pearson et P-Value ?")
+    st.write("## Spearman, Pearson et P-Value ?")
     from scipy.stats import spearmanr
     from sklearn.linear_model import LinearRegression
     from scipy.stats import pearsonr
@@ -176,9 +176,7 @@ elif page == pages[1]:
     df_filtered = df_co2[(df_co2['iso_code'].notna()) & (df_co2['year'] >= 1850) & (df_co2['year'] <= 2021)]
     df_sum_co2 = df_filtered.groupby('year')['co2_including_luc'].sum().reset_index()
 
-    # Supposons que df_sum_co2 contienne les données de la somme du CO2 et df_anoIncTemp contienne les données de l'anomalie de température
-    # Assurez-vous que ces DataFrames sont correctement définis avec les colonnes 'year' et les valeurs correspondantes.
-
+    
     # Fusionner les deux DataFrames sur la colonne 'year'
     df_merged = pd.merge(df_sum_co2, df_anoIncTemp, on='year', how='inner')
 
@@ -186,42 +184,43 @@ elif page == pages[1]:
     correlation_coefficient, p_value = spearmanr(df_merged['co2_including_luc'], df_merged['anomalie'])
 
     # Afficher les résultats
-    st.write(f"Corrélation de Spearman : {correlation_coefficient}")
-    st.write(f"P-value : {p_value}")
+    st.write(f"### Corrélation de Spearman = {correlation_coefficient}")
+    st.write(f"### P-value = {p_value}")
     # Interprétation du résultat
     if p_value < 0.05:
-        st.write("La corrélation est statistiquement significative.")
+        st.write("#### La corrélation est statistiquement significative.")
     else:
-        st.write("La corrélation n'est pas statistiquement significative.")
+        st.write("#### La corrélation n'est pas statistiquement significative.")
 
-    # Supposons que df_sum_co2 contienne les données de la somme du CO2 et df_anoIncTemp contienne les données de l'anomalie de température
-    # Assurez-vous que ces DataFrames sont correctement définis avec les colonnes 'year' et les valeurs correspondantes.
-
+    st.write("")
+    st.write("")
+ 
     # Fusionner les deux DataFrames sur la colonne 'year'
-    df_merged = pd.merge(df_sum_co2, df_anoIncTemp, on='year', how='inner')
+    #df_merged = pd.merge(df_sum_co2, df_anoIncTemp, on='year', how='inner')
 
     # Séparer les caractéristiques (X) de la cible (y)
-    X = df_merged[['co2_including_luc']]
-    y = df_merged['anomalie']
+    #X = df_merged[['co2_including_luc']]
+    #y = df_merged['anomalie']
 
     # Créer et entraîner le modèle de régression linéaire
-    linear_model = LinearRegression()
-    linear_model.fit(X, y)
+    #linear_model = LinearRegression()
+    #linear_model.fit(X, y)
 
     # Calculer la corrélation de Spearman entre les prédictions du modèle et la cible
-    predictions = linear_model.predict(X)
-    correlation_coefficient, p_value = spearmanr(predictions, y)
+    #predictions = linear_model.predict(X)
+    #correlation_coefficient, p_value = spearmanr(predictions, y)
 
     # Afficher les résultats
-    st.write(f"Corrélation de Spearman avec la régression linéaire : {correlation_coefficient}")
-    st.write(f"P-value : {p_value}")
-
+    #st.write(f"Corrélation de Spearman avec la régression linéaire : {correlation_coefficient}")
+    #st.write(f"P-value : {p_value}")
+    
+    
     # Interprétation du résultat
-    if p_value < 0.05:
-        st.write("La corrélation est statistiquement significative.")
-    else:
-        st.write("La corrélation n'est pas statistiquement significative.")
-
+    #if p_value < 0.05:
+        #st.write("La corrélation est statistiquement significative.")
+    #else:
+       # st.write("La corrélation n'est pas statistiquement significative.")
+    
 
 
     # Sélectionner les données pour la période spécifiée
@@ -231,17 +230,24 @@ elif page == pages[1]:
     correlation, p_value = pearsonr(df_selected['co2_including_luc'], df_selected['population'])
 
     # Afficher le résultat
-    st.write(f"Corrélation de Pearson : {correlation}")
-    st.write(f"Valeur de p : {p_value}")
+    st.write(f"### Corrélation de Pearson = {correlation}")
+    st.write(f"### P-Value = {p_value}")
 
     # Interprétation du résultat
     if p_value < 0.05:
-        st.write("La corrélation est statistiquement significative.")
+        st.write("#### La corrélation est statistiquement significative.")
     else:
-        st.write("La corrélation n'est pas statistiquement significative.")
+        st.write("#### La corrélation n'est pas statistiquement significative.")
+    st.write("")
+    st.write("")
+     
+    st.write("#### Le choix entre Pearson et Spearman dépend de la nature de la relation entre les variables. Si la relation est linéaire, Pearson peut être plus approprié. Si la relation n'est pas nécessairement linéaire, Spearman peut être préféré. La valeur P aide à évaluer la significativité statistique de la corrélation observée.")
+    st.write("#### Pearson semble plus adapté pour souligner la corrélaton entre la population et les émissions de CO2 (1850 -2018).")
+
+
 
 else:
-
+    st.write("### Prédictions")
     selected_date = st.selectbox("Sélectionner la date de début :", [2050, 2073, 2100]) 
     prohet_predictions = joblib.load(f'predictions/prophet_{selected_date}')
 
@@ -250,11 +256,11 @@ else:
         fig = plt.figure(figsize=(20, 10))
         plt.plot(prohet_predictions['ds'], prohet_predictions['yhat'], label='yhat')
 
-        if st.checkbox("Prediction Yhat + Incertitude", True) : 
+        if st.checkbox("Predictions Yhat Valeur Haute", True) : 
             plt.plot(prohet_predictions['ds'], prohet_predictions['yhat_upper'], label='Prediction + Incertitude', color="darkred")
             plt.fill_between(prohet_predictions['ds'], prohet_predictions['yhat'], prohet_predictions['yhat_upper'], color='pink')
 
-        if st.checkbox("predictions Yhat - Incertitude", True): 
+        if st.checkbox("predictions Yhat Valeur Basse", True): 
             plt.plot(prohet_predictions['ds'], prohet_predictions['yhat_lower'], label='Prediction - Incertitude', color="darkred")
             plt.fill_between(prohet_predictions['ds'], prohet_predictions['yhat'], prohet_predictions['yhat_lower'], color='pink')
 
@@ -267,11 +273,11 @@ else:
         fig = plt.figure(figsize=(20, 10))
         plt.plot(prohet_predictions['ds'], prohet_predictions['trend'], label='trend')
         
-        if st.checkbox("Prediction Trend + Incertitude", True) : 
+        if st.checkbox("Predictions Trend Valeur Haute", True) : 
             plt.plot(prohet_predictions['ds'], prohet_predictions['trend_upper'], label='Prediction + Incertitude', color="darkred")
             plt.fill_between(prohet_predictions['ds'], prohet_predictions['trend'], prohet_predictions['trend_upper'], color='pink')
 
-        if st.checkbox("predictions Trend - Incertitude", True): 
+        if st.checkbox("predictions Trend Valeur Basse", True): 
             plt.plot(prohet_predictions['ds'], prohet_predictions['trend_lower'], label='Prediction - Incertitude', color="darkred")
             plt.fill_between(prohet_predictions['ds'], prohet_predictions['trend'], prohet_predictions['trend_lower'], color='pink')
 
@@ -282,3 +288,19 @@ else:
 
     
     st.write(prohet_predictions)
+    st.write("")
+    st.write("### Prédictions Trend et Yhat à l'horizon :") 
+    st.write("#### 2050 : T + 1.5384  et  Y + 1.2578")
+    st.write("#### 2073 : T + 1.8881  et  Y + 1.5153")
+    st.write("#### 2100 : T + 2.2987  et  Y + 1.9563")
+    st.write("")
+    
+    st.write("#### La TENDANCE dans Prophet représente la composante de la série temporelle qui capture la direction générale de l'évolution des données au fil du temps. C'est la tendance globale, généralement représentée par une ligne droite, qui indique la direction dans laquelle les données évoluent.")
+    st.write("#### Le YHAT est la notation couramment utilisée pour représenter les valeurs prédites par le modèle de séries temporelles. En d'autres termes, il s'agit des valeurs prévues de la série temporelle pour chaque point temporel.")  
+      
+    
+st.write("") 
+st.write("")
+
+st.markdown('<p style="color: red; font-size: 20px;">Tous les modèles ont été sauvegardés dans Models_generator.py et grâce à joblib cela nous évite de les relancer à chaque changement de page.</p>', unsafe_allow_html=True)
+   

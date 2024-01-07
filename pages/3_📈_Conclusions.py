@@ -1,62 +1,16 @@
-
-
-import pandas as pd
-import matplotlib.pyplot as plt
-import streamlit as st 
-
-"""
+import streamlit as st
 st.set_page_config(
     page_title="Projet Température",
     page_icon="👋",
     layout="wide",
 )
 
-df_anoIncTemp = pd.read_csv('data/Anomalies Incertitude Temperature.csv', sep = ';')
+st.markdown("# Conclusions")
 
-# Supposons que df_anoIncTemp contienne les données de l'anomalie de température
-# Assurez-vous que ce DataFrame est correctement défini avec les colonnes 'ds' (datestamp) et 'y' (valeur à prédire).
-
-# Renommer les colonnes pour correspondre aux attentes de Prophet
-df_anoIncTemp_prophet = df_anoIncTemp.rename(columns={'year': 'ds', 'anomalie': 'y'})
-
-# Créer et entraîner le modèle Prophet
-model = Prophet()
-model.fit(df_anoIncTemp_prophet)
-
-# Créer un DataFrame pour les années que vous souhaitez prédire (par exemple, 2021 à 2050)
-future_2050 = pd.DataFrame({'ds': pd.date_range(start='2021-01-01', end='2050-01-01', freq='Y')})
-
-# Faire des prédictions pour la période 2021-2050
-forecast_2050 = model.predict(future_2050)
-
-# Tracer les résultats pour la période 2021-2050
-fig_2050 = model.plot(forecast_2050)
-plt.title('Prédictions de l\'anomalie de température (2021-2050)')
-plt.xlabel('Année')
-plt.ylabel('Anomalie de température')
-plt.show()
-
-# Créer un DataFrame pour les années que vous souhaitez prédire (par exemple, 2021 à 2100)
-future_2100 = pd.DataFrame({'ds': pd.date_range(start='2021-01-01', end='2100-01-01', freq='Y')})
-
-# Faire des prédictions pour la période 2021-2100
-forecast_2100 = model.predict(future_2100)
-
-# Tracer les résultats pour la période 2021-2100
-fig_2100 = model.plot(forecast_2100)
-plt.title('Prédictions de l\'anomalie de température (2021-2100)')
-plt.xlabel('Année')
-plt.ylabel('Anomalie de température')
-plt.show()
-"""
-
-
-import streamlit as st
-
-
+st.image("images/hemisphère-nord-temperature-800000.jpg")
 # Titre de l'application
 st.write("# Dérive des Continents")
-st.image("images/hemisphère-nord-temperature-800000.jpg")
+
 # Charger et afficher la vidéo avec une largeur personnalisée
 video_path = "derive.mp4" 
 video_file = open(video_path, "rb").read()
