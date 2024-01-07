@@ -86,3 +86,9 @@ st.write("")
 st.write("")
 
 st.write("#### Si on a le temps Guillaume le Conquérant et les Droits de l'Homme. Deux exemples parfaits du Maximum Médiéval et du Petit Age Glaciaire.")
+
+st.write("")
+st.write("")
+
+st.write("#### Une petite citation d'un universitaire à large spectre :")
+st.write("#### L'Histoire n'est que le rejeton mal-aimé de la Géogarphie et de la Climatologie. Conçu lors d'une soirée organisée par la Géologie. Soirée passablement arrosée!")
