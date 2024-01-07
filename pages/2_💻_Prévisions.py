@@ -264,7 +264,8 @@ else:
             plt.plot(prohet_predictions['ds'], prohet_predictions['yhat_lower'], label='Prediction - Incertitude', color="darkred")
             plt.fill_between(prohet_predictions['ds'], prohet_predictions['yhat'], prohet_predictions['yhat_lower'], color='pink')
 
-    
+        
+
         plt.xticks(pd.date_range(start=prohet_predictions["ds"].min(), end=prohet_predictions["ds"].max(), freq='10Y'), pd.date_range(start=prohet_predictions["ds"].min(), end=prohet_predictions["ds"].max(), freq='10Y', inclusive='both').year)
         plt.grid(True)
         st.pyplot(fig)
