@@ -13,8 +13,8 @@ st.set_page_config(
     layout="wide",
 )
 
-st.markdown("# Exploration des données")
-st.sidebar.header("Exploration des données")
+st.markdown("# Prévisions")
+st.sidebar.header("Prévisions")
 footer="""<style>
 a:link , a:visited{
 color: blue;
@@ -44,12 +44,13 @@ text-align: center;
 """
 st.markdown(footer,unsafe_allow_html=True)
 
-pages = ["Entrainement", "Spearman et Pearson", "Prédiction"]
+pages = ["Entrainement", "Corrélation", "Prédiction"]
 page = st.sidebar.radio("Aller vers la page :", pages)
 
 df_anoIncTemp = pd.read_csv('data/Anomalies Incertitude Temperature.csv', sep = ';')
 
 if page == pages[0]:
+    st.write("### Entrainements et tests (1950 et 1980)")
     # Liste des modèles
     model_of_interest = ['Decision tree', 'Random forest', 'XGBRegressor', 'Lasso', 'Ridge', 'Linear regression']
 
@@ -152,8 +153,17 @@ if page == pages[0]:
                 st.write(erreurs_quadratique)
             with colResult:
                 st.write(erreurs_quadratiques[erreurs_quadratique])
+                
+    st.write("### Nous allons entrainer 6 différents modèles avec deux années de départ : 1950 - 1980.")  
+    st.write("### Les durées de tests iront, respectivement, de 1950 à 2010 et de 1980 à 2010 et les trains de 2011 à 2021 dans le2 2 cas.")
+    st.write("### Ceci nous permettra de voir si une période de test plus longue deviendrait plus pertinente.") 
+    st.write("")
+    st.write("### Les meilleurs résultats sont obtenus avec la Linear Regression avec un départ en 1980")
+    st.write("Il est important de noter que le MSE est sensible aux valeurs aberrantes (outliers), car les carrés accentuent davantage les erreurs importantes.")
+    st.write("Nous avons donc pris le parti de tenir compte des valeurs aberrantes, compte tenu de l'objet de l'étude. Nous vivons tous actuellement, avec plus ou moins de force avec ces valeurs.")            
 
 elif page == pages[1]:
+    st.write("### Spearman, Pearson et P-Value ?")
     from scipy.stats import spearmanr
     from sklearn.linear_model import LinearRegression
     from scipy.stats import pearsonr
